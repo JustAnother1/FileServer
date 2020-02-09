@@ -452,6 +452,7 @@ public class FileServer extends Thread
             location = storeFile(filename, path, 0, hash);
             if(null == location)
             {
+                System.err.println("ERROR : could not find a location for the file");
                 toClient.writeBytes("2:3:\n");
                 return;
             }
@@ -467,6 +468,7 @@ public class FileServer extends Thread
         }
         if(true == f.exists())
         {
+            System.out.println("ERROR: from the client " + request.getClientId() + " File already exists ! Use update!");
             toClient.writeBytes("2:3:\n");
         }
         else
@@ -478,6 +480,7 @@ public class FileServer extends Thread
             }
             else
             {
+                System.out.println("ERROR: writing file failed!");
                 f.delete();
                 toClient.writeBytes("2:3:\n");
             }
@@ -595,6 +598,7 @@ public class FileServer extends Thread
                     }
                 }
                 toClient.flush();
+                toClient.close();
                 connectionSocket.close();
             }
             catch(IOException e)

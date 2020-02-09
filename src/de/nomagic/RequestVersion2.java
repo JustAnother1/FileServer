@@ -152,18 +152,21 @@ public class RequestVersion2
         int sig = stream.read();
         if('2' != sig)
         {
+            System.err.println("ERROR Receiving ! 2 is missing !");
             fout.close();
             return false;
         }
         sig = stream.read();
         if(':' != sig)
         {
+            System.err.println("ERROR Receiving ! : is missing !");
             fout.close();
             return false;
         }
         sig = stream.read();
         if('\n' != sig)
         {
+            System.err.println("ERROR Receiving ! newline is missing !");
             fout.close();
             return false;
         }
