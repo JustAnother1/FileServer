@@ -15,7 +15,7 @@ import java.security.NoSuchAlgorithmException;
 public class FileServer extends Thread
 {
     private static final int MAX_FOLDER_LEVEL = 15;
-    private static final int MAX_FILES_IN_FOLDER = 5;  // does not count the up to 256 folders
+    private static final int MAX_FILES_IN_FOLDER = 300;  // does not count the up to 256 folders
 
     private int ServerPort = 4321;
     private DataOutputStream toClient;
