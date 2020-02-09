@@ -135,6 +135,7 @@ public class FileServer extends Thread
                                     } while(num > 0);
                                     fin.close();
                                     toClient.writeBytes("2:\n");
+                                    System.out.println("send the file " + request.getFile() + " to the client " + request.getClientId());
                                 }
                             }
                             else
@@ -154,6 +155,7 @@ public class FileServer extends Thread
                                 if(true == request.writeTo(f))
                                 {
                                     toClient.writeBytes("2:0:\n");
+                                    System.out.println("stored the file " + request.getFile() + " from the client " + request.getClientId());
                                 }
                                 else
                                 {
@@ -176,6 +178,7 @@ public class FileServer extends Thread
                                     if(true == request.writeTo(f))
                                     {
                                         toClient.writeBytes("2:0:\n");
+                                        System.out.println("updated the file " + request.getFile() + " from the client " + request.getClientId());
                                     }
                                     else
                                     {
