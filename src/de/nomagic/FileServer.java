@@ -395,7 +395,7 @@ public class FileServer extends Thread
             if(null == location)
             {
                 // we do not have the file
-                toClient.writeBytes("2:4:\n");
+                toClient.writeBytes("2:4:could not find the location of the file\n");
                 return;
             }
             else
@@ -413,7 +413,7 @@ public class FileServer extends Thread
             long filesize = f.length();
             if(false == f.canRead())
             {
-                toClient.writeBytes("2:4:\n");
+                toClient.writeBytes("2:4:can not read the file\n");
             }
             else
             {
@@ -435,7 +435,7 @@ public class FileServer extends Thread
         }
         else
         {
-            toClient.writeBytes("2:4:\n");
+            toClient.writeBytes("2:4:file does not exist\n");
         }
     }
 
@@ -453,7 +453,7 @@ public class FileServer extends Thread
             if(null == location)
             {
                 System.err.println("ERROR : could not find a location for the file");
-                toClient.writeBytes("2:3:\n");
+                toClient.writeBytes("2:3:reason=could not find a location for the file:\n");
                 return;
             }
             else
@@ -469,7 +469,7 @@ public class FileServer extends Thread
         if(true == f.exists())
         {
             System.out.println("ERROR: from the client " + request.getClientId() + " File already exists ! Use update!");
-            toClient.writeBytes("2:3:\n");
+            toClient.writeBytes("2:3:reason=File already exists! Use update!:\n");
         }
         else
         {
@@ -482,7 +482,7 @@ public class FileServer extends Thread
             {
                 System.out.println("ERROR: writing file failed!");
                 f.delete();
-                toClient.writeBytes("2:3:\n");
+                toClient.writeBytes("2:3:reason=writing file failed:\n");
             }
         }
     }
@@ -500,7 +500,7 @@ public class FileServer extends Thread
             if(null == location)
             {
                 // we do not have the file
-                toClient.writeBytes("2:4:\n");
+                toClient.writeBytes("2:4:reason=could not find the file:\n");
                 return;
             }
             else
@@ -517,7 +517,7 @@ public class FileServer extends Thread
         {
             if(false == f.delete())
             {
-                toClient.writeBytes("2:6:\n");
+                toClient.writeBytes("2:6:reason=could not delete old file:\n");
             }
             else
             {
@@ -529,13 +529,13 @@ public class FileServer extends Thread
                 else
                 {
                     f.delete();
-                    toClient.writeBytes("2:6:\n");
+                    toClient.writeBytes("2:6:reason=writing the file failed:\n");
                 }
             }
         }
         else
         {
-            toClient.writeBytes("2:4:\n");
+            toClient.writeBytes("2:4:reason=tried to update a file that does not exist:\n");
         }
     }
 
